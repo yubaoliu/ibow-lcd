@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 project(ibow-lcd LANGUAGES CXX)
 
+set(CMAKE_BUILD_TYPE Debug)
+set (CMAKE_VERBOSE_MAKEFILE ON)
+
 # Setting build type to Release
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
@@ -14,8 +17,10 @@ if(CMAKE_BUILD_TYPE MATCHES Release)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3 -march=native")
 elseif(CMAKE_BUILD_TYPE MATCHES Debug)
   message(STATUS "Setting Debug options")
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O1 -pg -march=native")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O1 -pg -march=native")
+  # set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O1 -pg -march=native")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -pg -march=native")
+  # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O1 -pg -march=native")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pg -march=native")
 endif()
 
 # Check C++11 or C++0x support

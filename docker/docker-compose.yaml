@@ -1,0 +1,35 @@
+version: '2.3'
+services:
+  IBOW-LCD:
+    image: ibow-lcd
+    # container_name: root_ros_noetic
+    build:
+        context: .
+        # dockerfile: Dockerfile
+        # args:
+        #     CUDA_VERSION: 11.3.0-cudnn8
+        #     ROS_DISTRO: kinetic
+        #     # ubuntu_version: 16.04
+    runtime: nvidia
+    stdin_open: true
+    tty: true
+    privileged: true
+    command:
+        - xterm
+        # - lxterminal
+    environment:
+        - DISPLAY
+        - QT_X11_NO_MITSHM=1
+    devices:
+        - /dev/dri
+    volumes:
+        - /tmp/.X11-unix:/tmp/.X11-unix:rw
+        - ~/.Xauthority:/root/.Xauthority
+        - ..:/root/catkin_ws/src/ibow-lcd/
+        - ~/Data/Dataset:/root/Dataset
+        - docker_ibow_lcd:/root
+        # - /usr/lib/nvidia-cuda-toolkit:/usr/lib/nvidia-cuda-toolkit
+    entrypoint: /root/entrypoint.sh
+
+volumes:
+    docker_ibow_lcd:
